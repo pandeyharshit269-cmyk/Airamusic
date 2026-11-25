@@ -40,6 +40,9 @@ def install_req(cmd: str) -> Tuple[str, str, int, int]:
 
 def git():
     REPO_LINK = config.UPSTREAM_REPO
+    if not REPO_LINK:
+        LOGGER(__name__).info("UPSTREAM_REPO not set, skipping git update.")
+        return
     if config.GIT_TOKEN:
         GIT_USERNAME = REPO_LINK.split("com/")[1].split("/")[0]
         TEMP_REPO = REPO_LINK.split("https://")[1]
@@ -50,7 +53,8 @@ def git():
         repo = Repo()
         LOGGER(__name__).info(f"Git Client Found [VPS DEPLOYER]")
     except GitCommandError:
-        LOGGER(__name__).info(f"Invalid Git Command")
+        LOGGER(__name__).info("Invalid Git Command")
+        return
     except InvalidGitRepositoryError:
         repo = Repo.init()
         if "origin" in repo.remotes:
