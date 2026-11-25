@@ -16,6 +16,7 @@ import importlib
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
 import config
+from config import BANNED_USERS
 from SHUKLAMUSIC import LOGGER, app, userbot
 from SHUKLAMUSIC.core.call import SHUKLA
 from SHUKLAMUSIC.misc import sudo
